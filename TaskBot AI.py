@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import json
-
+from fastapi import FastAPI
 # Use Google's Flan-T5-Base model from Hugging Face
 model_id = "google/flan-t5-base"
 
@@ -67,4 +67,4 @@ def ask():
 
 if __name__ == "__main__":
     # Bind to all network interfaces so the app is externally accessible
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=7860)
