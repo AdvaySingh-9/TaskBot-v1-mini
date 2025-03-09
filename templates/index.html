@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskBot</title>
+  <script src="https://kit.fontawesome.com/cda0e70b18.js" crossorigin="anonymous"></script>
+  <link rel="Icon" href="TaskBot logo.png">
+  </head>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    /* Header styling: center title and position the sticky dropdown at top-right */
+    header {
+      position: relative;
+      padding: 20px 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .sticky {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    .sticky2 {
+      position: absolute;
+      top: 20px;
+      right: 80px;
+      z-index: 1000;
+    }
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .btn {
+      background-color: transparent;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #910f7e;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #000;
+      border: 1px solid blue;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    .dropdown-content h3 {
+      margin: 5px 0;
+      color: aquamarine;
+      text-align: center;
+    }
+    .dropdown-content a {
+      color: aqua;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      border-top: 1px solid transparent;
+    }
+    .dropdown-content a:hover {
+      background-color: #1d1d1d;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    hr {
+      margin: 0;
+      border: 0;
+      border-top: 1px solid #444;
+    }
+    /* Main Content: Centering the input, button, and paragraph */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 100px); /* adjust if header height changes */
+      text-align: center;
+    }
+    /* Input and Button Styles */
+    #question {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+    button {
+      background-color: #000;
+      color: white;
+      border: 1px solid white;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #910f7e;
+    }
+    p {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with centered titele and sticky dropdown -->
+  <header>
+    <h1 style="text-align: left">TaskBot v1 mini</h1>
+    <div class="sticky">
+      <div class="dropdown">
+        <button class="btn">
+          <i class="fa-solid fa-bars fa-2xl"></i>
+        </button>
+        <div class="dropdown-content">
+          <h3><u>Menu</u></h3>
+          <hr>
+          <a href="https://taskbot-ai-astrumix.netlify.app/">Home</a>
+          <a href="https://taskbot-suggest.netlify.app/">Suggest</a>
+          <a href="https://taskbot-complain.netlify.app/">Complain</a>
+          <a href="https://taskbot-ai-astrumix.netlify.app#contact">Contact</a>
+          <a href="https://taskbot-ai-astrumix.netlify.app#versions">Versions</a>
+          <a href="">Explore(Available soon)</a>
+        </div>
+      </div>
+    </div>
+    <div class="sticky2">
+      <div class="dropdown">
+        <button class="btn">
+          <i class="fa-solid fa-exclamation fa-2xl"></i>
+        </button>
+        <div class="dropdown-content">
+          <h3><u>Warnings</u></h3>
+          <hr>
+          <p>1. Don't share personal info, chats may be reviewed and reused to train our models.</p>
+          <hr>
+          <p>2. TaskBot can make mistakes, double check the answers by yourself for more accuracy.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content with centered input & Ask button, plus the answer paragraph -->
+  <main>
+    <div style="display: flex; align-items: center;">
+      <input type="text" id="question" placeholder="Ask Me Anything..." />
+      <button onclick="askQuestion()">Ask</button>
+    </div><br>
+    <div style="max-height: 300px; overflow-y: auto; border: 1px solid rgb(0, 0, 0); padding: 10px; color: white">
+    <p id="answer"></p>
+    </div>
+  </main>
+
+  <!-- Example JavaScript function -->
+  <script>
+    async function askQuestion() {
+        const question = document.getElementById("question").value;
+        // Send a POST request to the /ask route
+        const response = await fetch("/ask", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams({ question: question })
+        });
+        const data = await response.json();
+        if (data.answer) {
+            document.getElementById("answer").innerText = data.answer;
+        } else if (data.error) {
+            document.getElementById("answer").innerText = "Error: " + data.error;
+        }
+    }
+</script>
+</body>
+</html>
+
