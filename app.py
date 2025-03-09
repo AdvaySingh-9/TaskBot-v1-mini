@@ -16,7 +16,7 @@ model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
 app = Flask(__name__)
 
 # Load abusive words list
-with open("abusive_words.json", "r") as f:
+with open("abusive_words (unsafe to open).json", "r") as f:
     abusive_words = json.load(f)
 
 safe_default_message = "An error occurred, please try again later. error:-█"
@@ -56,7 +56,7 @@ def ask():
         if any(name in lower_question for name in names_to_check):
             answer = god["description"]
             return jsonify({"answer": clean_answer(answer)})
-
+    print(question)
     # Fallback: Use the model to generate an answer if no god is detected
     prompt = (
         "You are an AI created by Advay Singh and Astrumix. "
@@ -72,3 +72,4 @@ def ask():
 if __name__ == "__main__":
     # Bind to all network interfaces so the app is externally accessible
     app.run(host="0.0.0.0", port=7860)
+
