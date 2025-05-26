@@ -1,6 +1,6 @@
 # TaskBot-v1-mini
 # Description 📓
-This is a simple AI runs on the model Google-Flan-T5 Base.
+This is a simple [AI](https://huggingface.co/spaces/Advay-Singh/taskbot-v1-mini) runs on the model Google-Flan-T5 Base.
 
 # Technologies Used
 # Technologies Used
