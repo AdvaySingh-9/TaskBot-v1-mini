@@ -9,5 +9,7 @@ This is a simple [AI](https://huggingface.co/spaces/Advay-Singh/taskbot-v1-mini)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
 
-
 Improve TaskBot AI by giving any [suggestion](https://taskbot-suggest.netlify.app) or [complain](https://taskbot-complain.netlify.app) if you have any. 
+
+# License
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
